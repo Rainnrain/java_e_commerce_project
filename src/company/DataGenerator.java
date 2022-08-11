@@ -44,5 +44,20 @@ public class DataGenerator {
 
     }
 
+    public static void createProduct(){
+        Product product1= new Product(UUID.randomUUID(), "iPhone", 1230.33, 8, 8, StaticConstants.CATEGORY_LIST.get(0).getId());
+        Product product2= new Product(UUID.randomUUID(), "XBOX", 885.45, 15, 15, StaticConstants.CATEGORY_LIST.get(0).getId());
+        Product product3= new Product(UUID.randomUUID(), "Table", 999.00, 25, 25, StaticConstants.CATEGORY_LIST.get(1).getId());
+        Product product4=new Product(UUID.randomUUID(),"Milk", 4.89, 200, 200, UUID.randomUUID());
+
+        StaticConstants.PRODUCT_LIST.add(product1);
+        StaticConstants.PRODUCT_LIST.add(product2);
+        StaticConstants.PRODUCT_LIST.add(product3);
+        StaticConstants.PRODUCT_LIST.add(product4);
+
+
+
+    }
+
 
 }
