@@ -1,5 +1,7 @@
 package company;
 
+import company.category.Category;
+
 import java.util.UUID;
 
 public class Product {
@@ -46,5 +48,14 @@ public class Product {
 
     public void setRemainingStock(Integer remainingStock) {
         this.remainingStock = remainingStock;
+    }
+
+    public String getCategoryName() throws Exception{
+        for(Category category : StaticConstants.CATEGORY_LIST){
+            if(getCategoryID().toString().equals(category.getId().toString())){
+                return category.getName();
+            }
+        }
+        throw new Exception("Category not found, " +getName());
     }
 }
