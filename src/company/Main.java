@@ -1,5 +1,7 @@
 package company;
 
+import company.category.Category;
+
 import java.util.Scanner;
 
 public class Main {
@@ -40,11 +42,10 @@ while(true){
 
         case 0:
 
-
+            for(Category category: StaticConstants.CATEGORY_LIST){
+                System.out.println("Category Code: "+ category.generateCategoryCode()+" category name: "+ category.getName());
+            }
             break;
-
-
-
 
 
         case 1:
