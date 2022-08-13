@@ -1,7 +1,9 @@
 package company;
 
 import company.category.Category;
+import company.discount.Discount;
 
+import java.security.DigestInputStream;
 import java.util.Scanner;
 
 public class Main {
@@ -57,13 +59,17 @@ while(true){
                     System.out.println("Product could not be printed because category not found for product name: "
                             +e.getMessage().split(",")[1]);
                 }
-
             break;
 
 
         case 2:
+            for(Discount discount: StaticConstants.DISCOUNT_LIST){
+                System.out.println("Discount Name: "+ discount.getName()+" discount threshold amount: "+ discount.getThresholdAmount());
+            }
             break;
+
         case 3:
+
             break;
         case 4:
             break;
