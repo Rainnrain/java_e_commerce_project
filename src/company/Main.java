@@ -2,6 +2,7 @@ package company;
 
 import company.balance.Balance;
 import company.balance.CustomerBalance;
+import company.balance.GiftCardBalance;
 import company.category.Category;
 import company.discount.Discount;
 
@@ -73,7 +74,9 @@ public class Main {
 
                 case 3:
 
-                   CustomerBalance customerBalance= findCustomerBalance(customer.getId());
+                   CustomerBalance cBalance= findCustomerBalance(customer.getId());
+                   GiftCardBalance gbalance = findGiftCardBalance(customer.getId());
+
 
 
                     break;
@@ -118,4 +121,20 @@ public class Main {
         StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
         return customerBalance;
     }
+
+    private static GiftCardBalance findGiftCardBalance(UUID customerId){
+
+        for(Balance giftCardBalance  : StaticConstants.GIFT_CARD_BALANCE_LIST){
+            if(giftCardBalance.getCustomerId().toString().equals(customerId.toString())){
+                return (GiftCardBalance) giftCardBalance;
+            }
+        }
+
+        GiftCardBalance giftCardBalance= new GiftCardBalance(customerId, 0d);
+        StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCardBalance);
+
+        return giftCardBalance;
+    }
+
+
 }
