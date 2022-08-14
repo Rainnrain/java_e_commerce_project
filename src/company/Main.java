@@ -77,6 +77,10 @@ public class Main {
                    CustomerBalance cBalance= findCustomerBalance(customer.getId());
                    GiftCardBalance gbalance = findGiftCardBalance(customer.getId());
 
+                double totalBalance= cBalance.getBalance() +gbalance.getBalance();
+                    System.out.println("Total Balance: "+ totalBalance);
+                    System.out.println("Customer Balance: "+ cBalance.getBalance());
+                    System.out.println("Gift Card Balance: "+ gbalance.getBalance());
 
 
                     break;
@@ -124,6 +128,9 @@ public class Main {
 
     private static GiftCardBalance findGiftCardBalance(UUID customerId){
 
+        for (Balance balance : StaticConstants.GIFT_CARD_BALANCE_LIST) {
+            
+        }
         for(Balance giftCardBalance  : StaticConstants.GIFT_CARD_BALANCE_LIST){
             if(giftCardBalance.getCustomerId().toString().equals(customerId.toString())){
                 return (GiftCardBalance) giftCardBalance;

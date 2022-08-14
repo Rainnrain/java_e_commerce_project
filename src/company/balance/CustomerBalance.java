@@ -3,7 +3,7 @@ package company.balance;
 import java.util.UUID;
 
 public class CustomerBalance extends Balance{
-    public CustomerBalance(UUID customerId, double balance) {
+    public CustomerBalance(UUID customerId, Double balance) {
         super(customerId, balance);
     }
 
