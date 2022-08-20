@@ -107,10 +107,10 @@ public class Main {
                             break;
                     }
 
-
-
                     break;
+
                 case 5:
+
                     break;
                 case 6:
                     break;
