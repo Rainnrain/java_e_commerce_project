@@ -20,6 +20,17 @@ public class Cart {
         this.productMap = productMap;
     }
 
+    public Double calculateCartTotalAmount(){
+        double totalAmount=0;
+        for(Product product: productMap.keySet()){
+            totalAmount+= product.getPrice()*productMap.get(product);
+        }
+        return totalAmount;
+    }
+
+
+
+
     public Customer getCustomer() {
         return customer;
     }
