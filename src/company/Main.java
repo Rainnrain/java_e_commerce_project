@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
+import static company.StaticConstants.DISCOUNT_LIST;
 
 public class Main {
     public static void main(String[] args) {
@@ -152,6 +153,30 @@ public class Main {
                             continue;
                         }
 
+                        System.out.println("Do you want to add any more product. Type Y for adding more, N for exiting");
+                        String decision=scanner.next();
+
+                        if(!decision.equals("Y")){
+                            break;
+                        }
+
+
+                        System.out.println("Seems like there are discount options. Do yuo want to see and apply to your cart if it is" +
+                                "applicable. For No Discount type: no");
+
+
+                        for (Discount discount : DISCOUNT_LIST) {
+                            System.out.println("Discount id "+ discount.getId()+" discount name: "+discount.getName());
+                        }
+
+                        String discountId=scanner.next();
+
+                        if(!discountId.equalsIgnoreCase("no")){
+
+                            Discount discount= findDiscountById(discountId);
+                        }
+
+
                         break;
                         case 6:
                             break;
@@ -170,6 +195,15 @@ public class Main {
 
 
         }
+    }
+
+    private static Discount findDiscountById(String discountId) throws Exception{
+        for(Discount discount: DISCOUNT_LIST) {
+            if (discount.getId().equals(discountId)) {
+                return discount;
+            }
+        }
+        throw new Exception("Discount couldn't be applied because not found");
     }
 
 
