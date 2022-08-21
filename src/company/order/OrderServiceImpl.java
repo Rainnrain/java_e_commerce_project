@@ -1,12 +1,17 @@
 package company.order;
 
 import company.Cart;
+import company.checkout.CheckoutService;
+import company.checkout.CustomerBalanceCheckoutServiceImpl;
+import company.checkout.MixPaymentCheckoutServiceImpl;
 import company.discount.Discount;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.UUID;
 
 import static company.StaticConstants.DISCOUNT_LIST;
+import static company.StaticConstants.ORDER_LIST;
 
 
 public class OrderServiceImpl implements OrderService{
@@ -36,10 +41,27 @@ public class OrderServiceImpl implements OrderService{
         switch(paymentType){
 
             case 1:
-                CheckoutService customerBalanceCheckoutService = new
+                CheckoutService customerBalanceCheckoutService = new CustomerBalanceCheckoutServiceImpl();
+                checkoutResult=customerBalanceCheckoutService.checkout(cart.getCustomer(), amountAfterDiscount);
+                break;
+            case 2:
+                CheckoutService mixPaymentCheckoutService = new MixPaymentCheckoutServiceImpl();
+                checkoutResult=mixPaymentCheckoutService.checkout(cart.getCustomer(), amountAfterDiscount);
+                break;
+
 
         }
 
+        if(checkoutResult){
+            Order order = new Order(UUID.randomUUID(), LocalDateTime.now(), cart.calculateCartTotalAmount(), amountAfterDiscount,
+                    cart.calculateCartTotalAmount()-amountAfterDiscount, cart.getCustomer().getId(),
+                    "placed", cart.getProductMap().keySet());
+            ORDER_LIST.add(order);
+            return "Order has been placed successfully";
+
+        }else{
+            return " Balance is insufficient. Please add money to one of your balances and try again";
+        }
 
     }
 

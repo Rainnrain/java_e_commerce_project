@@ -5,6 +5,8 @@ import company.balance.CustomerBalance;
 import company.balance.GiftCardBalance;
 import company.category.Category;
 import company.discount.Discount;
+import company.order.OrderService;
+import company.order.OrderServiceImpl;
 
 import java.security.DigestInputStream;
 import java.util.HashMap;
@@ -184,9 +186,21 @@ public class Main {
                             }
                         }
 
+                        OrderService orderService= new OrderServiceImpl();
+                        String result=orderService.placeOrder(cart);
 
+                        if(result.equals("Order has been placed successfully")){
+                            System.out.println("Order is successful");
+                            updateProductStock(cart.getProductMap());
+                            cart.setProductMap(new HashMap<>());
+                            cart.setDiscountId(null);
+                        }
+                        else {
+                            System.out.println(result);
+                        }
 
                         break;
+
                         case 6:
                             break;
                         case 7:
@@ -203,6 +217,11 @@ public class Main {
             }
 
 
+        }
+
+        private static void updateProductStock(Map<Product, Integer> map){
+        for(Product product: map.keySet()){
+            product.setRemainingStock(product.getRemainingStock()-map.get(product));
         }
     }
 
