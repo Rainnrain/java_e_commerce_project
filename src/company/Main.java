@@ -142,43 +142,43 @@ public class Main {
 
                         try {
                             Product product = findProductById(productId);
-                            if(!putItemToCartIfStockAvailble(cart, product)){
+                            if (!putItemToCartIfStockAvailble(cart, product)) {
                                 System.out.println("Stock is insufficient. Please try again");
                                 continue;
                             }
 
 
-                        }catch( Exception e){
+                        } catch (Exception e) {
                             System.out.println("Product does not exist. Please try again");
                             continue;
                         }
 
                         System.out.println("Do you want to add any more product. Type Y for adding more, N for exiting");
-                        String decision=scanner.next();
+                        String decision = scanner.next();
 
-                        if(!decision.equals("Y")){
+                        if (!decision.equals("Y")) {
                             break;
                         }
-
+                    }
 
                         System.out.println("Seems like there are discount options. Do yuo want to see and apply to your cart if it is" +
                                 "applicable. For No Discount type: no");
 
 
                         for (Discount discount : DISCOUNT_LIST) {
-                            System.out.println("Discount id "+ discount.getId()+" discount name: "+discount.getName());
+                            System.out.println("Discount id " + discount.getId() + " discount name: " + discount.getName());
                         }
 
-                        String discountId=scanner.next();
+                        String discountId = scanner.next();
 
-                        if(!discountId.equalsIgnoreCase("no")){
-                            try{
-                            Discount discount= findDiscountById(discountId);
-                            if(discount.decideDiscountIsApplicableToCart(cart)){
-                                cart.setDiscountId(discount.getId());
-                            }
+                        if (!discountId.equalsIgnoreCase("no")) {
+                            try {
+                                Discount discount = findDiscountById(discountId);
+                                if (discount.decideDiscountIsApplicableToCart(cart)) {
+                                    cart.setDiscountId(discount.getId());
+                                }
 
-                        }catch(Exception e){
+                            } catch (Exception e) {
                                 System.out.println(e.getMessage());
 
                             }
