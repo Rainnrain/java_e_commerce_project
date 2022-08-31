@@ -5,6 +5,7 @@ import company.balance.CustomerBalance;
 import company.balance.GiftCardBalance;
 import company.category.Category;
 import company.discount.Discount;
+import company.order.Order;
 import company.order.OrderService;
 import company.order.OrderServiceImpl;
 
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
 import static company.StaticConstants.DISCOUNT_LIST;
+import static company.StaticConstants.ORDER_LIST;
 
 public class Main {
     public static void main(String[] args) {
@@ -202,10 +204,26 @@ public class Main {
                         break;
 
                         case 6:
+                            System.out.println("Your Cart");
+
+                            if(!cart.getProductMap().keySet().isEmpty()){
+                                for(Product product: cart.getProductMap().keySet()){
+                                    System.out.println("product name: "+product.getName()
+                                    +" count: "+ cart.getProductMap().get(product));
+                                }
+                            }else{
+                                System.out.println("Your cart is empty");
+                            }
                             break;
+
+
                         case 7:
+
+                            printOrdersByCustomerId(customer.getId());
+
                             break;
                         case 8:
+
                             break;
                         case 9:
                             break;
@@ -219,7 +237,19 @@ public class Main {
 
         }
 
-        private static void updateProductStock(Map<Product, Integer> map){
+    private static void printOrdersByCustomerId(UUID customerId) {
+        for(Order order: ORDER_LIST){
+            if(order.getCustomerId().toString().equals(customerId.toString())){
+                System.out.println("Order status: "+ order.getOrderStatus()+
+                        " Order amount "+ order.getPaidAmount()+ " order date "+ order.getOrderDate());
+            }
+        }
+        if(ORDER_LIST.size()==0){
+            System.out.println("No order has been placed");
+        }
+    }
+
+    private static void updateProductStock(Map<Product, Integer> map){
         for(Product product: map.keySet()){
             product.setRemainingStock(product.getRemainingStock()-map.get(product));
         }
